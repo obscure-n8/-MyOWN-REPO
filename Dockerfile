@@ -1,12 +1,10 @@
-FROM reignz3/wzml:hk
+FROM python:3.11-slim
 
-WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
-
-RUN uv venv --system-site-packages
+WORKDIR /app
+RUN apt-get update && apt-get install -y ffmpeg
 
 COPY requirements.txt .
-RUN uv pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
